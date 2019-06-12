@@ -7,7 +7,7 @@ from django.http import JsonResponse
 def index(request):
     return HttpResponse("Hello World")
 
-def getlatitude(request, latitude, longitude):
+def getlocation(request, latitude, longitude):
     location = {
         'latitude' : latitude,
         'longitude' : longitude
