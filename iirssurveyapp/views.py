@@ -14,7 +14,7 @@ def index(request):
 def getlocation(request, latitude, longitude, layer):
     point = {
         "type": "Point",
-        "coordinates": [float(latitude), float(longitude)]
+        "coordinates": [float(longitude), float(latitude)]
     }
     loclayer = Userloclayer.objects.create(location = GEOSGeometry(json.dumps(point)), layer = layer)
     loclayer.save()
