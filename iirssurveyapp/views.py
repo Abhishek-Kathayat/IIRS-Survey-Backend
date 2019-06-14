@@ -2,9 +2,10 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.gis.geos import GEOSGeometry
 from .models import Userloclayer
-import fiona
 from shapely.geometry import MultiPolygon, mapping, Point, Polygon, shape
 from shapely.geometry.polygon import Polygon
+import fiona
+import json
 
 # Create your views here.
 
