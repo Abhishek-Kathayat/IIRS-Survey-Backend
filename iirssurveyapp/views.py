@@ -25,7 +25,7 @@ def getlocation(request, latitude, longitude, layer):
         for index, ward in enumerate(shphandle):
             location = Point(float(longitude), float(latitude))
             if location.within(shape(ward['geometry'])):
-                populationrespone = {
+                populationresponse = {
                     "Ward No": ward['properties']['NUMBER1'],
                     "Area Type": ward['properties']['TRU'],
                     "Total People": ward['properties']['TOT_P'],
@@ -44,7 +44,7 @@ def getlocation(request, latitude, longitude, layer):
                     "Total Non Working Males": ward['properties']['NON_WORK_M'],
                     "Total Non Working Females": ward['properties']['TOT_WORK_F']
                 }
-                return JsonResponse(populationrespone)
+                return JsonResponse(populationresponse)
         return HttpResponse("Location not inside any Ward")
 
     if layer == "soil":
@@ -52,10 +52,10 @@ def getlocation(request, latitude, longitude, layer):
         for index, ward in enumerate(shphandle):
             location = Point(float(longitude), float(latitude))
             if location.within(shape(ward['geometry'])):
-                soilrespone = {
+                soilresponse = {
                     "Ward No": ward['properties']['NUMBER1']
                 }
-                return JsonResponse(soilrespone)
+                return JsonResponse(soilresponse)
         return HttpResponse("Location not inside any Ward")
 
     if layer == "drainage":
@@ -63,10 +63,10 @@ def getlocation(request, latitude, longitude, layer):
         for index, ward in enumerate(shphandle):
             location = Point(float(longitude), float(latitude))
             if location.within(shape(ward['geometry'])):
-                drainagerespone = {
+                drainageresponse = {
                     "Ward No": ward['properties']['NUMBER1']
                 }
-                return JsonResponse(drainagerespone)
+                return JsonResponse(drainageresponse)
         return HttpResponse("Location not inside any Ward")
 
     if layer == "lithology":
@@ -74,10 +74,10 @@ def getlocation(request, latitude, longitude, layer):
         for index, ward in enumerate(shphandle):
             location = Point(float(longitude), float(latitude))
             if location.within(shape(ward['geometry'])):
-                lithologyrespone = {
+                lithologyresponse = {
                     "Ward No": ward['properties']['NUMBER1']
                 }
-                return JsonResponse(lithologyrespone)
+                return JsonResponse(lithologyresponse)
         return HttpResponse("Location not inside any Ward")
 
     if layer == "geomorphology":
@@ -85,8 +85,8 @@ def getlocation(request, latitude, longitude, layer):
         for index, ward in enumerate(shphandle):
             location = Point(float(longitude), float(latitude))
             if location.within(shape(ward['geometry'])):
-                geomorphorespone = {
+                geomorphoresponse = {
                     "Ward No": ward['properties']['NUMBER1']
                 }
-                return JsonResponse(geomorphorespone)
+                return JsonResponse(geomorphoresponse)
         return HttpResponse("Location not inside any Ward")
