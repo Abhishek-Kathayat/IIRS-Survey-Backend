@@ -21,7 +21,6 @@ def getlocation(request, latitude, longitude, layer):
     loclayer = Userloclayer.objects.create(location = GEOSGeometry(json.dumps(point)), layer = layer)
     loclayer.save()
     if layer == "population":
-
         shphandle = ([ward for ward in fiona.open(r"C:\Users\abhis\Documents\IIRS Internship\Jupyter Lab\DDN_Geo.shp")])
         for index, ward in enumerate(shphandle):
             location = Point(float(longitude), float(latitude))
@@ -46,4 +45,48 @@ def getlocation(request, latitude, longitude, layer):
                     "Total Non Working Females": ward['properties']['TOT_WORK_F']
                 }
                 return JsonResponse(populationrespone)
+        return HttpResponse("Location not inside any Ward")
+
+    if layer == "soil":
+        shphandle = ([ward for ward in fiona.open(r"C:\Users\abhis\Documents\IIRS Internship\Jupyter Lab\DDN_Geo.shp")])
+        for index, ward in enumerate(shphandle):
+            location = Point(float(longitude), float(latitude))
+            if location.within(shape(ward['geometry'])):
+                soilrespone = {
+                    "Ward No": ward['properties']['NUMBER1']
+                }
+                return JsonResponse(soilrespone)
+        return HttpResponse("Location not inside any Ward")
+
+    if layer == "drainage":
+        shphandle = ([ward for ward in fiona.open(r"C:\Users\abhis\Documents\IIRS Internship\Jupyter Lab\DDN_Geo.shp")])
+        for index, ward in enumerate(shphandle):
+            location = Point(float(longitude), float(latitude))
+            if location.within(shape(ward['geometry'])):
+                drainagerespone = {
+                    "Ward No": ward['properties']['NUMBER1']
+                }
+                return JsonResponse(drainagerespone)
+        return HttpResponse("Location not inside any Ward")
+
+    if layer == "lithology":
+        shphandle = ([ward for ward in fiona.open(r"C:\Users\abhis\Documents\IIRS Internship\Jupyter Lab\DDN_Geo.shp")])
+        for index, ward in enumerate(shphandle):
+            location = Point(float(longitude), float(latitude))
+            if location.within(shape(ward['geometry'])):
+                lithologyrespone = {
+                    "Ward No": ward['properties']['NUMBER1']
+                }
+                return JsonResponse(lithologyrespone)
+        return HttpResponse("Location not inside any Ward")
+
+    if layer == "geomorphology":
+        shphandle = ([ward for ward in fiona.open(r"C:\Users\abhis\Documents\IIRS Internship\Jupyter Lab\DDN_Geo.shp")])
+        for index, ward in enumerate(shphandle):
+            location = Point(float(longitude), float(latitude))
+            if location.within(shape(ward['geometry'])):
+                geomorphorespone = {
+                    "Ward No": ward['properties']['NUMBER1']
+                }
+                return JsonResponse(geomorphorespone)
         return HttpResponse("Location not inside any Ward")
