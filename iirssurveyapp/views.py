@@ -1,17 +1,27 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.gis.geos import GEOSGeometry
-from .models import Userloclayer
+from .models import Userloclayer, Layer
 from django.http import JsonResponse
 from shapely.geometry import MultiPolygon, mapping, Point, Polygon, shape
 from shapely.geometry.polygon import Polygon
+from django.core import serializers
 import fiona
 import json
 
-# Create your views here.
 
 def index(request):
     return HttpResponse("IIRS Survey App")
+
+def getLayers(request):
+    layers = Layer.objects.all()
+    layerresponse = [
+        {
+            'layer': str(layer)
+        }
+        for layer in list(layers)
+    ]
+    return JsonResponse(layerresponse, safe=False)
 
 def getlocation(request, latitude, longitude):
     point = {
