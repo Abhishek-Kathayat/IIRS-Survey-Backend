@@ -34,6 +34,7 @@ def getlocation(request, latitude, longitude):
     loclayer = Userloclayer.objects.create(location = GEOSGeometry(json.dumps(point)))
     loclayer.save()
 
+    responsedata = {}
     shapefiles = list()
     for file_name in os.listdir('C:/Users/abhis/Documents/IIRS Internship/Jupyter Lab/ShapeFiles/Modified ShapeFiles/'):
         if fnmatch.fnmatch(file_name, '*.shp'):
@@ -48,13 +49,37 @@ def getlocation(request, latitude, longitude):
         else:
             filehandle.to_file('C:/Users/abhis/Documents/IIRS Internship/Jupyter Lab/ShapeFiles/Modified ShapeFiles/Temp_data.shp')
 
-        shphandle = ([ward for ward in fiona.open(r"C:\Users\abhis\Documents\IIRS Internship\Jupyter Lab\ShapeFiles\Modified ShapeFiles\Temp_data.shp")])
-        for index, ward in enumerate(shphandle):
-            location = Point(float(longitude), float(latitude))
-            #if location.within(shape(ward['geometry'])):
+        response = getShpData(shapefile, latitude, longitude)
+
+        if shapefile == 'Drainage.shp':
+            responsedata["Drainage"] = response
+        elif shapefile == 'DDN_Geo.shp':
+            responsedata["Population"] = response
+        elif shapefile == 'Geomorphology.shp':
+            responsedata["Geomorphology"] = response
+        elif shapefile == 'Lithology.shp':
+            responsedata["Lithology"] = response
+        elif shapefile == 'Existing_Site.shp':
+            responsedata["Existing Site"] = response
+        elif shapefile == 'Slope.shp':
+            responsedata["Slope"] = response
+        elif shapefile == 'Soil.shp':
+            responsedata["Soil"] = response
+        elif shapefile == 'LULC_12Classes.shp':
+            responsedata["Land Usage"] = response
+
+    return JsonResponse(responsedata)
+
+
+def getShpData(shapefile, latitude, longitude):
+    shphandle = ([ward for ward in fiona.open(r"C:\Users\abhis\Documents\IIRS Internship\Jupyter Lab\ShapeFiles\Modified ShapeFiles\Temp_data.shp")])
+    for index, ward in enumerate(shphandle):
+        location = Point(float(longitude), float(latitude))
+        if location.within(shape(ward['geometry'])):
             if shapefile == 'Drainage.shp':
                 drainage = {
                 }
+                return drainage
             elif shapefile == 'DDN_Geo.shp':
                 population = {
                     "Ward No": ward['properties']['NUMBER1'],
@@ -75,6 +100,7 @@ def getlocation(request, latitude, longitude):
                     "Total Non Working Males": ward['properties']['NON_WORK_M'],
                     "Total Non Working Females": ward['properties']['TOT_WORK_F']
                 }
+                return population
             elif shapefile == 'Geomorphology.shp':
                 geomorphology = {
                     "Area": ward['properties']['AREA'],
@@ -84,6 +110,7 @@ def getlocation(request, latitude, longitude):
                     "Regional_G": ward['properties']['REGIONAL_G'],
                     "Geomorphology Score": ward['properties']['geo_score']
                 }
+                return geomorphology
             elif shapefile == 'Lithology.shp':
                 lithology = {
                     "Geology": ward['properties']['GEOLOGY_'],
@@ -93,9 +120,11 @@ def getlocation(request, latitude, longitude):
                     "Perimeter": ward['properties']['PERIMETER'],
                     "Lithology Score": ward['properties']['lit_score']
                 }
+                return lithology
             elif shapefile == 'Existing_Site.shp':
                 existing_site = {
                 }
+                return existing_site
             elif shapefile == 'Slope.shp':
                 slope = {
                     "Grid Code": ward['properties']['grid_code'],
@@ -103,6 +132,7 @@ def getlocation(request, latitude, longitude):
                     "Slope Score": ward['properties']['slop_score'],
                     "Area": ward['properties']['Shape_Area']
                 }
+                return slope
             elif shapefile == 'Soil.shp':
                 soil = {
                     "Soil Code": ward['properties']['SO_CODE'],
@@ -113,6 +143,7 @@ def getlocation(request, latitude, longitude):
                     "Soil Score": ward['properties']['soil_score'],
                     "GeoTOPSYS": ward['properties']['geoTOPSYS']
                 }
+                return soil
             elif shapefile == 'LULC_12Classes.shp':
                 lulc_class = {
                     "Land Usage Score": ward['properties']['lu_score'],
@@ -120,17 +151,35 @@ def getlocation(request, latitude, longitude):
                     "Land Usage": ward['properties']['r1_lulc'],
                     "Area": ward['properties']['Shape_Area']
                 }
-            break
+                return lulc_class
 
-    responsedata = {}
-    responsedata["Soil"] = soil
-    responsedata["Geomorphology"] = geomorphology
-    responsedata["Lithology"] = lithology
-    responsedata["Population"] = population
-    responsedata["Slope"] = slope
-    responsedata["Land Usage"] = lulc_class
+    if shapefile == 'Drainage.shp':
+        drainage = {}
+        return drainage
+    elif shapefile == 'DDN_Geo.shp':
+        population = {}
+        return population
+    elif shapefile == 'Geomorphology.shp':
+        geomorphology = {}
+        return geomorphology
+    elif shapefile == 'Lithology.shp':
+        lithology = {}
+        return lithology
+    elif shapefile == 'Existing_Site.shp':
+        existing_site = {}
+        return existing_site
+    elif shapefile == 'Slope.shp':
+        slope = {}
+        return slope
+    elif shapefile == 'Soil.shp':
+        soil = {}
+        return soil
+    elif shapefile == 'LULC_12Classes.shp':
+        lulc_class = {}
+        return lulc_class
 
-    return JsonResponse(responsedata)
+
+
 
             #elif shapefile in ['Hospitals.shp', 'Institutions.shp', 'MajorCityPoints.shp', 'OSM_Infra.shp', 'OSM_Points.shp']:
             #    loc_file = ward['geometry']
