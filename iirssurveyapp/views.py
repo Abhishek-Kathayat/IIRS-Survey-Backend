@@ -82,23 +82,13 @@ def getShpData(shapefile, latitude, longitude):
                 return drainage
             elif shapefile == 'DDN_Geo.shp':
                 population = {
-                    "Ward No": ward['properties']['NUMBER1'],
-                    "Area Type": ward['properties']['TRU'],
                     "Total People": ward['properties']['TOT_P'],
                     "Total Males": ward['properties']['TOT_M'],
                     "Total Females": ward['properties']['TOT_F'],
                     "Total Literate People": ward['properties']['P_LIT'],
-                    "Total Literate Males": ward['properties']['M_LIT'],
-                    "Total Literate Females": ward['properties']['F_LIT'],
                     "Total Illiterate People": ward['properties']['P_ILL'],
-                    "Total Illiterate Males": ward['properties']['M_ILL'],
-                    "Total Illiterate Females": ward['properties']['F_ILL'],
                     "Total Working People": ward['properties']['TOT_WORK_P'],
-                    "Total Working Males": ward['properties']['TOT_WORK_M'],
-                    "Total Working Females": ward['properties']['TOT_WORK_F'],
                     "Total Non Working People": ward['properties']['NON_WORK_P'],
-                    "Total Non Working Males": ward['properties']['NON_WORK_M'],
-                    "Total Non Working Females": ward['properties']['TOT_WORK_F']
                 }
                 return population
             elif shapefile == 'Geomorphology.shp':
@@ -181,38 +171,38 @@ def getShpData(shapefile, latitude, longitude):
 
 
 
-            #elif shapefile in ['Hospitals.shp', 'Institutions.shp', 'MajorCityPoints.shp', 'OSM_Infra.shp', 'OSM_Points.shp']:
-            #    loc_file = ward['geometry']
-            #    wardhandle = ([wardloc for wardloc in fiona.open(r"C:\Users\abhis\Documents\IIRS Internship\Jupyter Lab\ShapeFiles\Modified ShapeFiles\DDN_Geo.shp")])
-            #    for index, wardloc in enumerate(wardhandle):
-            #        if location.within(shape(wardloc['geometry'])) and loc_file.within(shape(wardloc['geometry'])):
-            #            if shapefile is 'Hospital.shp':
-            #                hospital = {
-            #                    "FID_Hospital": ward['properties']['FID_HOSPIT'],
-            #                    "Hospital Name": ward['properties']['NAME'],
-            #                    "FID_Municipality": ward['properties']['FID_MUNICI'],
-            #                    "Area Type": ward['properties']['TRU']
-            #                }
-            #                break
-            #            elif shapefile is 'Institutions.shp':
-            #                institutions = {
-            #                    "FID_Institute": ward['properties']['FID_INSTIT'],
-            #                    "Institute Name": ward['properties']['Name'],
-            #                    "Nearby Place": ward['properties']['nearby_pla'],
-            #                    "Area Type": ward['properties']['TRU'],
-            #                    "FID_MUNICI": ward['properties']['FID_MUNICI']
-            #                }
-            #                break
-            #            elif shapefile is 'MajorCityPoints.shp':
-            #                majorcitypoints =  {
-            #                    "ID": ward['properties']['Id'],
-            #                    "Grid Code": ward['properties']['grid_code'],
-            #                    "Original FID": ward['properties']['ORIG_FID']
-            #                }
-            #                break
-            #            elif shapefile is 'OSM_Infra.shp':
-            #                osm_infra = {
-            #                    "Name": ward['properties']['ONGC Telbhawan'],
-            #                    "Amenity": ward['properties']['public_building']
-            #                }
-            #                break
+#elif shapefile in ['Hospitals.shp', 'Institutions.shp', 'MajorCityPoints.shp', 'OSM_Infra.shp', 'OSM_Points.shp']:
+#    loc_file = ward['geometry']
+#    wardhandle = ([wardloc for wardloc in fiona.open(r"C:\Users\abhis\Documents\IIRS Internship\Jupyter Lab\ShapeFiles\Modified ShapeFiles\DDN_Geo.shp")])
+#    for index, wardloc in enumerate(wardhandle):
+#        if location.within(shape(wardloc['geometry'])) and loc_file.within(shape(wardloc['geometry'])):
+#            if shapefile is 'Hospital.shp':
+#                hospital = {
+#                    "FID_Hospital": ward['properties']['FID_HOSPIT'],
+#                    "Hospital Name": ward['properties']['NAME'],
+#                    "FID_Municipality": ward['properties']['FID_MUNICI'],
+#                    "Area Type": ward['properties']['TRU']
+#                }
+#                break
+#            elif shapefile is 'Institutions.shp':
+#                institutions = {
+#                    "FID_Institute": ward['properties']['FID_INSTIT'],
+#                    "Institute Name": ward['properties']['Name'],
+#                    "Nearby Place": ward['properties']['nearby_pla'],
+#                    "Area Type": ward['properties']['TRU'],
+#                    "FID_MUNICI": ward['properties']['FID_MUNICI']
+#                }
+#                break
+#            elif shapefile is 'MajorCityPoints.shp':
+#                majorcitypoints =  {
+#                    "ID": ward['properties']['Id'],
+#                    "Grid Code": ward['properties']['grid_code'],
+#                    "Original FID": ward['properties']['ORIG_FID']
+#                }
+#                break
+#            elif shapefile is 'OSM_Infra.shp':
+#                osm_infra = {
+#                    "Name": ward['properties']['ONGC Telbhawan'],
+#                    "Amenity": ward['properties']['public_building']
+#                }
+#                break
