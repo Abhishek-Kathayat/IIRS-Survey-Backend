@@ -28,7 +28,7 @@ SPATIALITE_LIBRARY_PATH = 'mod_spatialite'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["e36ef171.ngrok.io"]
 
 
 # Application definition

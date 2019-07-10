@@ -88,27 +88,21 @@ def getShpData(shapefile, latitude, longitude):
                     "Total Literate People": ward['properties']['P_LIT'],
                     "Total Illiterate People": ward['properties']['P_ILL'],
                     "Total Working People": ward['properties']['TOT_WORK_P'],
-                    "Total Non Working People": ward['properties']['NON_WORK_P'],
+                    "Total Non Working People": ward['properties']['NON_WORK_P']
                 }
                 return population
             elif shapefile == 'Geomorphology.shp':
                 geomorphology = {
-                    "Area": ward['properties']['AREA'],
                     "Geomorphology Class": ward['properties']['GEOM_CLASS'],
-                    "Perimeter": ward['properties']['PERIMETER'],
-                    "Regional_1": ward['properties']['REGIONAL_1'],
-                    "Regional_G": ward['properties']['REGIONAL_G'],
-                    "Geomorphology Score": ward['properties']['geo_score']
+                    "Regional": ward['properties']['REGIONAL_1'],
+                    "Regional": ward['properties']['REGIONAL_G']
                 }
                 return geomorphology
             elif shapefile == 'Lithology.shp':
                 lithology = {
                     "Geology": ward['properties']['GEOLOGY_'],
                     "Geology ID": ward['properties']['GEOLOGY_ID'],
-                    "Area": ward['properties']['Shape_Area'],
-                    "Lithology": ward['properties']['LITHOLOGY'],
-                    "Perimeter": ward['properties']['PERIMETER'],
-                    "Lithology Score": ward['properties']['lit_score']
+                    "Lithology": ward['properties']['LITHOLOGY']
                 }
                 return lithology
             elif shapefile == 'Existing_Site.shp':
@@ -117,10 +111,7 @@ def getShpData(shapefile, latitude, longitude):
                 return existing_site
             elif shapefile == 'Slope.shp':
                 slope = {
-                    "Grid Code": ward['properties']['grid_code'],
-                    "Slope Degree": ward['properties']['slope_degr'],
-                    "Slope Score": ward['properties']['slop_score'],
-                    "Area": ward['properties']['Shape_Area']
+                    "Slope Degree": ward['properties']['slope_degr']
                 }
                 return slope
             elif shapefile == 'Soil.shp':
@@ -130,16 +121,12 @@ def getShpData(shapefile, latitude, longitude):
                     "Soil Depth": ward['properties']['SoilDepth'],
                     "Soil Erosion": ward['properties']['SoilErosio'],
                     "Soil Texture": ward['properties']['SoilTextur'],
-                    "Soil Score": ward['properties']['soil_score'],
-                    "GeoTOPSYS": ward['properties']['geoTOPSYS']
                 }
                 return soil
             elif shapefile == 'LULC_12Classes.shp':
                 lulc_class = {
-                    "Land Usage Score": ward['properties']['lu_score'],
                     "Land Usage Class": ward['properties']['lu_class'],
                     "Land Usage": ward['properties']['r1_lulc'],
-                    "Area": ward['properties']['Shape_Area']
                 }
                 return lulc_class
 
