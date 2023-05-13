@@ -1,9 +1,9 @@
-# IIRS Survey API in Django
+## IIRS Survey Backend in Django
 ![Contributors](https://img.shields.io/github/contributors/Abhishek-Kathayat/IIRS_Survey_API)
 
 ### Introduction
 
-A Django REST API for the IIRSSurveyApp Android App. The API makes uses of Spatialite-SQLite as database. Main task of the API is to read the ArcGIS Shapefile available and locate the coordinates recieved from the frontend in the shapefile polygons and return the corresponding data associated with that location. Data recieved from the frontend is stored in PointField in the database.<br/>
+This is the backend IIRS Survey App Android App built using Python, Django & Spatialite-SQLite Database. Its primary function is to read an ArcGIS Shapefile and match the coordinates received from the frontend with the polygons in the shapefile. It then retrieves the relevant data associated with that location. The received data from the frontend is stored in the database using a PointField. <br/>
 <br/>
-This API is a part of the Android Application I created in Summer Internship Programme at Indian Institute of Remote Sensing (IIRS), Dehradun. The link to the Android Application project is provided below : <br/><br/>
+This was created during my Summer Internship Programme at Indian Institute of Remote Sensing (IIRS), Dehradun. Checkout the Android Application here:
 [IIRS Survey App](https://github.com/Abhishek-Kathayat/IIRSSurveyApp)
